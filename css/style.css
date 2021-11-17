@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap');
+
+
+h1, h2, h3, h4{
+  font-family: 'Lora', serif;
+}
+
+.title {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: underline;
+  color: rgb(192, 67, 132);
+  font-weight: bold;
+}
+
+
+a:hover {
+  color: rgb(217, 89, 155);
+  font-weight: bold;
+}
+
+.hljs-default .hljs {
+  border:none;
+  background: #F4F9F9;
+}

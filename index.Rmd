@@ -1,11 +1,12 @@
 ---
-title: "<span>Introducción a ggplot2</span>"
-subtitle: "<span>Entendiendo la gramática de los gráficos.</span> <br>"
+title: "<h1 class = 'title'>Introducción a ggplot2</h1>"
+subtitle: "<h2 class = 'subtitle'><i>Entendiendo la gramática<br>de los gráficos</i></h2>"
 author: "<a href = 'https://twitter.com/dev_aguero'><span>Carlos Agüero</span></a>"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     seal: false
+    css: ["default", "css/style.css"]
     lib_dir: libs
     nature:
       beforeInit: "https://platform.twitter.com/widgets.js"
@@ -40,7 +41,7 @@ meta() %>%
       "desde 0 hasta gráficos listos para publicar."
     ),
     url = "https://aguerodev.github.io/presentacion_ggplot2",
-    image = "https://user-images.githubusercontent.com/17366889/142266999-829a5df4-aafd-4d26-b143-6e9696d4f19e.png",
+    image = "https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=clamp&w=250&q=80&h=250",
     og_type = "website",
     og_author = "Carlos Agüero B",
     twitter_card_type = "summary_large_image",
@@ -55,7 +56,7 @@ class:left, middle
 
 ## `r rmarkdown::metadata$subtitle`
 
-### `r rmarkdown::metadata$author` `r fontawesome::fa("twitter", "#ff2b4f", height = "25px")`
+### `r rmarkdown::metadata$author` `r fontawesome::fa("twitter", "#00acee", height = "30px")`
 
 ### `r Sys.Date()`
 
@@ -80,9 +81,11 @@ class: inverse, center, middle
 
 # Hello World
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+Install the **xaringan** package from `codigo` [Github](https://github.com/yihui/xaringan):
 
 ```{r eval=FALSE, tidy=FALSE}
 remotes::install_github("yihui/xaringan")
+
+x <- c(34)
 ```
 
