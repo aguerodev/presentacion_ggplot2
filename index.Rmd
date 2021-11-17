@@ -1,22 +1,59 @@
 ---
-title: "Presentation Ninja"
-subtitle: "⚔<br/>with xaringan"
-author: "Yihui Xie"
-institute: "RStudio, PBC"
-date: "2016/12/12 (updated: `r Sys.Date()`)"
+title: "<span style='color:#fcab27'>Beautiful Tables in R</span>"
+subtitle: "<span style='color:#3686d3'>`gt` and the grammar of tables</span> <br>"
+author: "<a href = 'https://twitter.com/thomas_mock'><span style='color:#ff2b4f'>Tom Mock</span></a>"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
+    seal: false
+    css: ["default", "css/my-theme.css", "css/my-fonts.css"]
     lib_dir: libs
     nature:
-      highlightStyle: github
+      beforeInit: "https://platform.twitter.com/widgets.js"
+      ratio: '16:9'
+      highlightStyle: dracula
       highlightLines: true
       countIncrementalSlides: false
+      selfContained: true
 ---
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+
+options(htmltools.dir.version = FALSE,
+        tibble.max_extra_cols = 6,
+        tibble.width = 60)
+
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      dpi = 700)
+
+```
+
+
+```{r metathis, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "jthomasmock/tables-latinr") %>% 
+  meta_social(
+    title = "Beautiful tables in R with gt and the grammar of tables",
+    description = paste(
+      "Tables don't have to be boring,",
+      "and can be created quickly and efficiently in R with gt!"
+    ),
+    url = "https://jthomasmock.github.io/tables-latinr",
+    image = "https://raw.githubusercontent.com/jthomasmock/tables-latinr/master/title-card.png",
+    image_alt = paste(
+      "Title slide of 'Beautiful Tables in R, gt and the grammar of tables'.", 
+      "A slide deck covering the basics of using gt and gtExtras.",
+      "It also has a purple door with a stack of boxes stacked askew in front of it."
+    ),
+    og_type = "website",
+    og_author = "Tom Mock",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@thomas_mock",
+    twitter_site = "@thomas_mock"
+  )
 ```
 
 ???
