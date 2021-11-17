@@ -1,8 +1,8 @@
 ---
-title: "<h1 class = 'title'>Introducción a ggplot2</h1>"
-subtitle: "<h2 class = 'subtitle'><i>Entendiendo la gramática<br>de los gráficos</i></h2>"
-author: "<a href = 'https://twitter.com/dev_aguero'><span>Carlos Agüero</span></a>"
-date: "<span class = 'date'>`r Sys.Date()`</span>"
+title: "Introducción a ggplot2"
+subtitle: "Entendiendo la gramática<br>de los gráficos"
+author: "Carlos Agüero"
+date: "2021-11-17"
 output:
   xaringan::moon_reader:
     seal: false
@@ -29,6 +29,26 @@ knitr::opts_chunk$set(warning = FALSE,
 
 ```
 
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  title_slide_background_color = "#B4C6A6",
+  title_slide_text_color = "white",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "35px",
+  header_color = "#5E8B7E",
+  inverse_background_color = "#9FB8AD",
+  text_bold_color = "#B4C6A6",
+  text_bold_font_weight = "700",
+  code_inline_color = "#B4C6A6",
+  header_font_google = google_font("Lora", "300", "300i",
+                                   "400","400i", "700","700i"),
+  text_font_google   = google_font("Montserrat", "300", "300i","700"),
+  code_font_google   = google_font("Fira Code"),
+  outfile = "css/style.css",
+  extra_css = list("h1,h2,h3" = list("font-style" = "italic;"))
+)
+```
 
 ```{r metathis, echo=FALSE}
 library(metathis)
@@ -50,15 +70,13 @@ meta() %>%
   )
 ```
 
-class:left, middle
+class:left, middle, title-slide
 
 # `r rmarkdown::metadata$title`
 
 ## `r rmarkdown::metadata$subtitle`
 
-### `r rmarkdown::metadata$author` `r fontawesome::fa("twitter", "#00acee", height = "30px")`
-
-### `r Sys.Date()`
+<h4>`r rmarkdown::metadata$author`<h4>
 
 <br>
 
