@@ -1,17 +1,15 @@
 ---
-title: "<span style='color:#fcab27'>Beautiful Tables in R</span>"
-subtitle: "<span style='color:#3686d3'>`gt` and the grammar of tables</span> <br>"
-author: "<a href = 'https://twitter.com/thomas_mock'><span style='color:#ff2b4f'>Tom Mock</span></a>"
+title: "<span>Introducción a ggplot2</span>"
+subtitle: "<span>Entendiendo la gramática de los gráficos.</span> <br>"
+author: "<a href = 'https://twitter.com/dev_aguero'><span>Carlos Agüero</span></a>"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     seal: false
-    css: ["default", "css/my-theme.css", "css/my-fonts.css"]
     lib_dir: libs
     nature:
       beforeInit: "https://platform.twitter.com/widgets.js"
       ratio: '16:9'
-      highlightStyle: dracula
       highlightLines: true
       countIncrementalSlides: false
       selfContained: true
@@ -34,31 +32,37 @@ knitr::opts_chunk$set(warning = FALSE,
 ```{r metathis, echo=FALSE}
 library(metathis)
 meta() %>%
-  meta_name("github-repo" = "jthomasmock/tables-latinr") %>% 
+  meta_name("github-repo" ="aguerodev/presentacion_ggplot2") %>% 
   meta_social(
-    title = "Beautiful tables in R with gt and the grammar of tables",
+    title = "Introducción a ggplot2",
     description = paste(
-      "Tables don't have to be boring,",
-      "and can be created quickly and efficiently in R with gt!"
+      "Introducción a la gramática de los gráficos,",
+      "desde 0 hasta gráficos listos para publicar."
     ),
-    url = "https://jthomasmock.github.io/tables-latinr",
-    image = "https://raw.githubusercontent.com/jthomasmock/tables-latinr/master/title-card.png",
-    image_alt = paste(
-      "Title slide of 'Beautiful Tables in R, gt and the grammar of tables'.", 
-      "A slide deck covering the basics of using gt and gtExtras.",
-      "It also has a purple door with a stack of boxes stacked askew in front of it."
-    ),
+    url = "https://aguerodev.github.io/presentacion_ggplot2",
+    image = "https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=clamp&w=2000&q=80&h=2750",
     og_type = "website",
-    og_author = "Tom Mock",
+    og_author = "Carlos Agüero B",
     twitter_card_type = "summary_large_image",
-    twitter_creator = "@thomas_mock",
-    twitter_site = "@thomas_mock"
+    twitter_creator = "@dev_aguero",
+    twitter_site = "@dev_aguero"
   )
 ```
 
-???
+class:left, middle
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+# `r rmarkdown::metadata$title`
+
+## `r rmarkdown::metadata$subtitle`
+
+### `r rmarkdown::metadata$author` `r fontawesome::fa("twitter", "#ff2b4f", height = "25px")`
+
+### `r Sys.Date()`
+
+<br>
+
+
+<div style = "position: absolute;top: 0px;right: 0;"><img src="https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=clamp&w=2000&q=80&h=2750" alt="A purple door with a stack of boxes stacked askew, falling to the left" width="500"></img></div>
 
 ---
 class: center, middle

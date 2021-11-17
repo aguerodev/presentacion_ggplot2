@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Presentation Ninja</title>
+    <title>Introducción a ggplot2</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Yihui Xie" />
+    <meta name="author" content="Carlos Agüero" />
+    <meta name="date" content="2021-11-17" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <meta name="github-repo" content="aguerodev/presentacion_ggplot2"/>
+    <meta name="twitter:title" content="Introducción a ggplot2"/>
+    <meta name="twitter:description" content="Introducción a la gramática de los gráficos, desde 0 hasta gráficos listos para publicar."/>
+    <meta name="twitter:url" content="https://aguerodev.github.io/presentacion_ggplot2"/>
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=clamp&amp;w=2000&amp;q=80&amp;h=2750"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@dev_aguero"/>
+    <meta name="twitter:site" content="@dev_aguero"/>
+    <meta property="og:title" content="Introducción a ggplot2"/>
+    <meta property="og:description" content="Introducción a la gramática de los gráficos, desde 0 hasta gráficos listos para publicar."/>
+    <meta property="og:url" content="https://aguerodev.github.io/presentacion_ggplot2"/>
+    <meta property="og:image" content="https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=clamp&amp;w=2000&amp;q=80&amp;h=2750"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Carlos Agüero B"/>
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
-
-# Presentation Ninja
-## ⚔<br/>with xaringan
-### Yihui Xie
-### RStudio, PBC
-### 2016/12/12 (updated: 2021-11-17)
-
----
-
-
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
 
 
 
-???
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+
+
+class:left, middle
+
+# &lt;span&gt;Introducción a ggplot2&lt;/span&gt;
+
+## &lt;span&gt;Entendiendo la gramática de los gráficos.&lt;/span&gt; &lt;br&gt;
+
+### &lt;a href = 'https://twitter.com/dev_aguero'&gt;&lt;span&gt;Carlos Agüero&lt;/span&gt;&lt;/a&gt; <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:25px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ff2b4f;overflow:visible;position:relative;"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+
+### 2021-11-17
+
+&lt;br&gt;
+
+
+&lt;div style = "position: absolute;top: 0px;right: 0;"&gt;&lt;img src="https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=clamp&amp;w=2000&amp;q=80&amp;h=2750" alt="A purple door with a stack of boxes stacked askew, falling to the left" width="500"&gt;&lt;/img&gt;&lt;/div&gt;
 
 ---
 class: center, middle
@@ -55,10 +74,12 @@ remotes::install_github("yihui/xaringan")
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
+"ratio": "16:9",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"selfContained": true
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
