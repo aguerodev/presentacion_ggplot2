@@ -9,7 +9,6 @@ output:
     css: ["default", "css/style.css"]
     lib_dir: libs
     nature:
-      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
       ratio: '16:9' 
@@ -31,7 +30,8 @@ knitr::opts_chunk$set(warning = FALSE,
                       out.height = "95%",
                       fig.retina = 3,
                       fig.asp = 9/16)
-
+library(ggplot2)
+library(datos)
 ```
 
 
@@ -60,6 +60,7 @@ style_mono_accent(
   code_inline_color = "#B4C6A6",
   text_font_size = "28px",
   code_font_size = "24px",
+  code_highlight_color = "#F7EFB2",
   header_font_google = google_font("Lora", "300", "300i",
                                    "400","400i", "700","700i"),
   text_font_google   = google_font("Montserrat", "300", "300i","700"),
@@ -128,11 +129,9 @@ hist(...) # histogramas
 ---
 class: left, middle
 
-Ahora tenemos 
+Ahora tenemos una gramática que nos permite expresarnos de forma más fluida.
 
-```{r, ggplot-1, eval=FALSE}
-library(ggplot2)
-
+```{r, eval=FALSE}
 ggplot(data = iris,
        mapping = aes(x = Sepal.Length,
                      y = Petal.Length,
@@ -143,6 +142,277 @@ ggplot(data = iris,
 ---
 class: left, middle
 
+.pull-left[
+En **ggplot2** definimos nuestros gráficos como la unión una seria de capas entre las que tenemos:
+]
+
+.pull-right[
+
++ Datos
++ Geometrías (geom)
++ Estadísticos (stats)
++ Escalas (scales)
++ Coordenadas (coord)
++ Facetas (facets)
++ Etiquetas (labs)
++ Temas (themes)
+]
+
+---
+class: left, middle
+
+## Vamos poco a poco
+
+
+---
+class: left, middle
+
+# Datos
+
+---
+class: left, middle
+
+Trabajemos con una pequeña tabla muy conocida, .
+
+```{r, echo=FALSE}
+library(gt)
+gt(head(flores)) %>% 
+  tab_options(table.font.size = 28,
+              column_labels.font.weight = "500")
+```
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-1, eval=FALSE}
+ggplot(data = flores)
+```
+
+Vamos a iniciar con la **capa de datos**,
+cuando ejecutamos `ggplot(data = flores)` estamos indicando que estos son los datos con los que vamos a trabajar.
+
+Vemos que el resultado es un lienzo gris, en donde más adelante dibujaremos nuestro gráfico.
+]
+
+.pull-right[
 ```{r ref.label="ggplot-1", fig.callout=TRUE, echo=FALSE, dev='svglite'}
 ``` 
+]
+
+---
+class: left, middle
+
+# Mapeo
+
+---
+class: left
+El mapeo indica que codificación visual vamos a utilizar, es decir, que medio vamos a utilizar para representar nuestros datos, entre algunos de estos canales tenemos:
+
+<center>
+<img src = "img/elementos_visuales.png" width = "90%"></img>
+</center>
+
+---
+class: left
+
+.pull-left[
+```{r, eval=FALSE}
+ggplot(
+  data = flores,
+  mapping = aes(
+    x = Largo.Sepalo, #<<
+    y = Largo.Petalo,
+    color = Especies
+  )
+)
+```
+
+Utilizando la función `aes` definimos cómo se van a codificar visualmente nuestros datos.
+
+]
+
+.pull-right[
+```{r, echo=FALSE}
+library(gt)
+library(dplyr)
+
+head(flores) %>% 
+select(-contains("Ancho")) %>% 
+gt() %>% 
+   tab_spanner(
+    label = "Eje x",
+    columns = c(`Largo.Sepalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Eje y",
+    columns = c(`Largo.Petalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Color",
+    columns = c(`Especies`)
+  ) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_body(
+      columns = "Largo.Sepalo"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_labels(
+      columns = "Largo.Sepalo"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_spanners(
+      spanners = "Eje x"
+  )) %>% 
+   tab_options(table.font.size = 28,
+               column_labels.font.size = "30")
+```
+
+]
+
+---
+class: left
+
+.pull-left[
+```{r, eval=FALSE}
+ggplot(
+  data = flores,
+  mapping = aes(
+    x = Largo.Sepalo,
+    y = Largo.Petalo, #<<
+    color = Especies
+  )
+)
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE}
+library(gt)
+library(dplyr)
+
+head(flores) %>% 
+select(-contains("Ancho")) %>% 
+gt() %>% 
+   tab_spanner(
+    label = "Eje x",
+    columns = c(`Largo.Sepalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Eje y",
+    columns = c(`Largo.Petalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Color",
+    columns = c(`Especies`)
+  ) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_body(
+      columns = "Largo.Petalo"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_labels(
+      columns = "Largo.Petalo"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_spanners(
+      spanners = "Eje y"
+  )) %>% 
+   tab_options(table.font.size = 28,
+               column_labels.font.size = "30")
+```
+
+]
+
+
+---
+class: left
+
+.pull-left[
+```{r, eval=FALSE}
+ggplot(
+  data = flores,
+  mapping = aes(
+    x = Largo.Sepalo,
+    y = Largo.Petalo,
+    color = Especies #<<
+  )
+)
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE}
+library(gt)
+library(dplyr)
+
+head(flores) %>% 
+select(-contains("Ancho")) %>% 
+gt() %>% 
+   tab_spanner(
+    label = "Eje x",
+    columns = c(`Largo.Sepalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Eje y",
+    columns = c(`Largo.Petalo`)
+  ) %>% 
+  tab_spanner(
+    label = "Color",
+    columns = c(`Especies`)
+  ) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_body(
+      columns = "Especies"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_labels(
+      columns = "Especies"
+  )) %>% 
+  tab_style(
+    style = cell_fill(color = "#F7EFB2"),
+    locations = cells_column_spanners(
+      spanners = "Color"
+  )) %>% 
+   tab_options(table.font.size = 28,
+               column_labels.font.size = "30")
+```
+
+]
  
+
+ 
+ 
+---
+class:left 
+
+.pull-left[
+```{r, ggplot-2, eval=FALSE}
+ggplot(
+  data = flores,
+  mapping = aes(
+    x = Largo.Sepalo,
+    y = Largo.Petalo,
+    color = Especies
+  )
+)
+```
+
+Tenemos como resultado un pequeño gráfico en donde ya tenemos valores definidos para los ejes `x,y`.
+]
+
+.pull-right[
+```{r ref.label="ggplot-2", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
