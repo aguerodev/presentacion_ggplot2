@@ -7,13 +7,15 @@ output:
   xaringan::moon_reader:
     seal: false
     css: ["default", "css/style.css"]
+    self_contained: false 
     lib_dir: libs
     nature:
-      beforeInit: "https://platform.twitter.com/widgets.js"
-      ratio: '16:9'
+      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-      selfContained: true
+      ratio: '16:9' 
+      navigation:
+        scroll: false 
 ---
 
 ```{r setup, include=FALSE}
@@ -25,16 +27,14 @@ options(htmltools.dir.version = FALSE,
 knitr::opts_chunk$set(warning = FALSE,
                       message = FALSE,
                       fig.align = "center",
-                      dpi = 700)
+                      dpi = 400,
+                      out.width = "95%",
+                      out.height = "95%",
+                      fig.retina = 3,
+                      fig.asp = 9/16)
 
 ```
 
-```{r xaringanExtra-clipboard, echo=FALSE}
-xaringanExtra::use_clipboard(
-  button_text = "Haga clic para copiar",
-  success_text = "Copiado",
-  error_text = "Pulse Ctrl + C para copiar")
-```
 
 ```{r xaringanExtra-clipboard, echo=FALSE}
 htmltools::tagList(
@@ -127,3 +127,25 @@ pie(...) # pastel
 hist(...) # histogramas
 ```
 
+
+---
+class: left, middle
+
+Ahora tenemos 
+
+```{r, ggplot-1, eval=FALSE}
+library(ggplot2)
+
+ggplot(data = iris,
+       mapping = aes(x = Sepal.Length,
+                     y = Petal.Length,
+                     color = Species)) +
+  geom_point()
+```
+
+---
+class: left, middle
+
+```{r ref.label="ggplot-1", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+ 

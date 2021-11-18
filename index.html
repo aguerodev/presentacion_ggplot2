@@ -7,6 +7,12 @@
     <meta name="date" content="2021-11-17" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <meta name="github-repo" content="aguerodev/presentacion_ggplot2"/>
     <meta name="twitter:title" content="Introducción a ggplot2"/>
     <meta name="twitter:description" content="Introducción a la gramática de los gráficos, desde 0 hasta gráficos listos para publicar."/>
@@ -26,6 +32,9 @@
   </head>
   <body>
     <textarea id="source">
+
+
+
 
 
 
@@ -72,15 +81,39 @@ pie(...) # pastel
 hist(...) # histogramas
 ```
 
+
+---
+class: left, middle
+
+Ahora tenemos 
+
+
+```r
+library(ggplot2)
+
+ggplot(data = iris,
+       mapping = aes(x = Sepal.Length,
+                     y = Petal.Length,
+                     color = Species)) +
+  geom_point()
+```
+
+---
+class: left, middle
+
+&lt;img src="index_files/figure-html/unnamed-chunk-2-1.svg" width="95%" height="95%" style="display: block; margin: auto;" /&gt;
+ 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
-"ratio": "16:9",
+"highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false,
-"selfContained": true
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
