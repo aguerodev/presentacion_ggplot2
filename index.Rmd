@@ -80,7 +80,7 @@ meta() %>%
       "desde 0 hasta gráficos listos para publicar."
     ),
     url = "https://aguerodev.github.io/presentacion_ggplot2",
-    image = "https://images.unsplash.com/photo-1591617870684-6e861e6a48ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=clamp&w=250&q=80&h=250",
+    image = "https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/ggplot2_masterpiece.png",
     og_type = "website",
     og_author = "Carlos Agüero B",
     twitter_card_type = "summary_large_image",
