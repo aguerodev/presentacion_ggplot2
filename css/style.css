@@ -47,14 +47,14 @@
   --header-color: #5E8B7E;
   --background-color: #FFFFFF;
   --link-color: #43418A;
-  --text-bold-color: #B4C6A6;
+  --text-bold-color: #5E8B7E;
   --code-highlight-color: rgba(255,255,0,0.5);
   --inverse-text-color: #FFFFFF;
   --inverse-background-color: #9FB8AD;
   --inverse-header-color: #FFFFFF;
   --inverse-link-color: #43418A;
-  --title-slide-background-color: #B4C6A6;
-  --title-slide-text-color: white;
+  --title-slide-background-color: white;
+  --title-slide-text-color: #5E8B7E;
   --header-background-color: #5E8B7E;
   --header-background-text-color: #FFFFFF;
   --base: #43418A;
