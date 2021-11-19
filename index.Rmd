@@ -28,8 +28,7 @@ knitr::opts_chunk$set(warning = FALSE,
                       dpi = 400,
                       out.width = "95%",
                       out.height = "95%",
-                      fig.retina = 3,
-                      fig.asp = 9/16)
+                      fig.retina = 3)
 library(ggplot2)
 library(datos)
 ```
@@ -416,3 +415,48 @@ Tenemos como resultado un pequeño gráfico en donde ya tenemos valores definido
 ``` 
 
 ]
+
+---
+class: middle, left 
+
+# Geometrías
+
+---
+class: middle, center
+
+<center>
+<img src = "img/geoms-2.png" width = "90%"></img>
+</center>
+
+
+---
+class:left 
+
+.pull-left[
+```{r, ggplot-3, eval=FALSE}
+ggplot(
+  data = flores,
+  mapping = aes(
+    x = Largo.Sepalo,
+    y = Largo.Petalo,
+    color = Especies
+  )) +
+  geom_point() #<<
+```
+
+Usamos el operador `+` para **unir las capas de nuestro gráfico**.
+
+Con la función `geom_point()` vamos a especificar que queremos que las observaciones de nuestra tabla se "dibujen" como puntos en el plano.
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-3", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: middle, left
+
+## Podemos consultas todas las geometrías en la [documentación del paquete](https://ggplot2.tidyverse.org/reference/). 
