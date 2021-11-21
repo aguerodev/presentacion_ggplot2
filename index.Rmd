@@ -18,6 +18,7 @@ editor_options:
   chunk_output_type: console
 ---
 
+
 ```{r setup, include=FALSE}
 
 options(htmltools.dir.version = FALSE,
@@ -33,6 +34,8 @@ knitr::opts_chunk$set(warning = FALSE,
                       fig.retina = 3)
 library(ggplot2)
 library(datos)
+library(scales)
+library(forcats)
 ```
 
 
@@ -596,44 +599,12 @@ class: middle, center
 class: left
 
 .pull-left[
-```{r, ggplot-8, eval=FALSE}
-ggplot(
-  data = encuesta, 
-  mapping = aes(x = estado_civil)
-) +
-  geom_bar(fill = "steelblue") + #<<
-  labs(
-    x = "Estado Civil",
-    y = "Cantidad",
-    title = "Cantidad de encuestados por estado civil",
-    caption = "Fuente: Te lo juro por Dieguito maradona."
-  )
-```
-
-]
-
-.pull-right[
-```{r ref.label="ggplot-8", fig.callout=TRUE, echo=FALSE, dev='svglite'}
-``` 
-
-]
-
----
-class: middle, center
-
-```{r ref.label="ggplot-8", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
-``` 
-
----
-class: left
-
-.pull-left[
 ```{r, ggplot-9, eval=FALSE}
 ggplot(
   data = encuesta, 
   mapping = aes(x = estado_civil)
 ) +
-  geom_bar(fill = "steelblue") + 
+  geom_bar() + 
   labs(
     x = "Estado Civil",
     y = "Cantidad",
@@ -689,7 +660,7 @@ class: left
 ggplot(
   data = encuesta, 
   mapping = aes(x = estado_civil)) +
-geom_bar(fill = "steelblue")
+geom_bar()
 ```
 
 <img src = "img/doc_01.png" width= 300px></img>
@@ -748,7 +719,7 @@ class: left
 ggplot(
   data = encuesta, 
   mapping = aes(x = estado_civil)) +
-geom_bar(fill = "steelblue") +
+geom_bar() +
 geom_text(
   mapping = aes(
     label = after_stat(count) #<<
@@ -775,7 +746,7 @@ class: left
 ggplot(
   data = encuesta, 
   mapping = aes(x = estado_civil)) +
-geom_bar(fill = "steelblue") +
+geom_bar() +
 geom_text(
   mapping = aes(
     label = after_stat(count) 
@@ -792,3 +763,545 @@ Debemos indicar que vamos a usar el stat `count`.
 ``` 
 
 ]
+
+
+---
+class: middle, left 
+
+### Imagina que ahora lo que queremos ver es el `estado civil` por `raza`, para esto podemos usar el color.
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-12, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    x = estado_civil,
+    fill = raza, #<<
+  )) +
+geom_bar() +
+geom_text(
+  mapping = aes(
+    label = after_stat(count) 
+  ), 
+  stat = "count") 
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-12", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: middle, center
+
+```{r ref.label="ggplot-12", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
+``` 
+
+---
+class: middle, left
+
+### Los `stats` calculan lo que hace falta para dibujar las geometrías.
+
+### El atributo `position` calcula como hay que ordenarlos en la pantalla.
+
+
+---
+class: middle, left
+
+<center>
+<img src = "img/stat_position01.png" width = "90%"></img>
+</center>
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-13, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    x = estado_civil,
+    fill = raza, 
+  )) +
+geom_bar() +
+geom_text(
+  mapping = aes(
+    label = after_stat(count) 
+  ), 
+  position = position_stack( #<<
+    vjust = 0.5 #<<
+  ), #<<
+  stat = "count") 
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-13", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: middle, center
+
+<center>
+<img src = "img/stat_position02.png" width = "90%"></img>
+</center>
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-14, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    x = estado_civil,
+    fill = raza, 
+  )) +
+  geom_bar(
+    position = position_dodge() #<<
+  ) +
+  geom_text(
+    mapping = aes(
+      label = after_stat(count) 
+    ), 
+    position = position_dodge(#<<
+      width = 0.9#<<
+    ), #<<
+    stat = "count") 
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-14", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-15, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    x = estado_civil,
+    fill = raza, 
+  )) +
+  geom_bar(
+    position = position_fill()#<<
+  ) +
+  geom_text(
+    mapping = aes(
+      label = after_stat(count) 
+    ), 
+    position = position_fill(#<<
+      vjust = 0.5#<<
+    ), #<<
+    stat = "count") 
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-15", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left, middle
+
+### Es algo complicado leer el gráfico con los textos en el `eje x`, para leerlo mejor podemos moverlos al `eje y`.
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-16, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    y = estado_civil, #<<
+    fill = raza, 
+  )) +
+  geom_bar(
+    position = position_fill()
+  ) +
+  geom_text(
+    mapping = aes(
+      label = after_stat(count) 
+    ), 
+    position = position_fill(
+      vjust = 0.5
+    ), 
+    stat = "count") 
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-16", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+
+---
+class: middle, left
+
+### `Scales`, poniendo ggplot2 en modo manual
+
+<center>
+<img src = "img/homero.gif" width = "50%"></img>
+</center>
+
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-17, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(
+    y = estado_civil, fill = raza, 
+  )) +
+  geom_bar(
+    position = position_fill()
+  ) +
+  geom_text(
+    mapping = aes(
+      label = after_stat(count) 
+    ), 
+    position = position_fill(
+      vjust = 0.5
+    ), stat = "count") +
+  scale_x_continuous( #<<
+    labels = percent_format() #<<
+  ) #<<
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-17", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+```{r, echo=FALSE}
+g <- ggplot(
+  data = encuesta, 
+  mapping = aes(
+    y = estado_civil, fill = raza, 
+  )) +
+  geom_bar(
+    position = position_fill()
+  ) +
+  geom_text(
+    mapping = aes(
+      label = after_stat(count) 
+    ), 
+    position = position_fill(
+      vjust = 0.5
+    ), stat = "count") +
+  scale_x_continuous( #<<
+    labels = percent_format() #<<
+  ) #<<
+```
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-18, eval=FALSE}
+g +
+  scale_fill_manual(
+    values = c("#2F86A6",
+               "#FFCE45",
+               "#34BE82")
+  )
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-18", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+```{r, echo=FALSE}
+g <- g +
+  scale_fill_manual(
+    values = c("#2F86A6",
+               "#FFCE45",
+               "#34BE82")
+  )
+```
+
+---
+class: middle, left
+
+### `themes`, cambio de look al instante
+
+<center>
+<img src = "img/hada.gif" width = "50%"></img>
+</center>
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-22, eval=FALSE}
+g
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-22", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-19, eval=FALSE}
+g +
+  theme_minimal()
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-19", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-20, eval=FALSE}
+g +
+  theme_classic()
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-20", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-21, eval=FALSE}
+g +
+  theme_dark()
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-21", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: middle, left
+
+### Una pausa..
+
+---
+class: middle, left
+
+### Ahora intentemos resolver este ejemplo.
+
+---
+class: left
+Ahora tenemos una tabla con conteos.
+
+```{r, echo=FALSE}
+datos<- encuesta %>% 
+  count(estado_civil, raza) %>% 
+  group_by(estado_civil) %>% 
+  summarise(raza, n, prop = n/sum(n), .groups = "drop")
+```
+
+```{r, echo=FALSE}
+datos %>% 
+  head() %>% 
+  gt() %>% 
+   tab_options(table.font.size = 20,
+               column_labels.font.size = "20",
+               table.align = "left") %>% 
+  cols_align(
+  align = "left",
+  columns = everything())
+```
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-23, eval=FALSE}
+ggplot(
+  data = datos,
+  mapping = aes(
+    y = estado_civil,
+    x = prop,
+    fill = raza
+  )
+) +
+  geom_col() + #<<
+  geom_text(mapping = aes(
+    label = percent(prop,0.1)
+  ),
+  position = position_stack(0.5)
+  ) +
+  scale_x_continuous(
+    labels = percent_format()
+  )
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-23", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, eval=FALSE}
+geom_col()
+```
+
+Tengo valores para `x` y para `y`.
+]
+.pull-right[
+
+```{r, eval=FALSE}
+geom_bar()
+``` 
+Sólo tengo los valores de `x` y nesecito que StatCount calcule por mi el valor de `y`.
+]
+
+---
+class: middle, left
+
+### Ahora otras geometrías
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-24, eval=FALSE}
+ggplot(
+  data = encuesta,
+  mapping = aes(
+    x = raza,
+    y = edad
+  )
+) +
+  geom_boxplot()
+  
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-24", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-25, eval=FALSE}
+ggplot(
+  data = encuesta,
+  mapping = aes(
+    x = edad,
+    fill = raza
+  )
+) +
+  geom_density(alpha = 0.7)
+  
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-25", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left, middle
+
+### Facetas
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-26, eval=FALSE}
+ggplot(
+  data = encuesta,
+  mapping = aes(
+    y = cut_width(edad, 10), #<<
+  )
+) +
+  geom_bar() +
+  facet_wrap(~religion)
+  
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-26", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-27, eval=FALSE}
+ggplot(
+  data = encuesta,
+  mapping = aes(
+    y = cut_width(edad, 10), #<<
+  )
+) +
+  geom_bar() +
+  facet_wrap(
+    facets = ~fct_lump_n(#<<
+      religion,
+      n = 3,
+      other_level = "Otras")
+  )
+  
+```
+]
+.pull-right[
+
+```{r ref.label="ggplot-27", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+]
+
+
+---
+class: middle, left
+
+### Con esto ya podemos comenzar en el mundo de ggplot2.
+
+---
+class: left
+
+Paquetes que debemos revisar
+
++ [forcats](https://forcats.tidyverse.org)
++ [scales](https://scales.r-lib.org)
++ [ggrepel](https://ggrepel.slowkow.com)
++ [patchwork](https://patchwork.data-imaginist.com)
++ [ggforce](https://ggforce.data-imaginist.com)
