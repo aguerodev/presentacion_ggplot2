@@ -777,7 +777,7 @@ ggplot(
 geom_bar(fill = "steelblue") +
 geom_text(
   mapping = aes(
-    label = after_stat(count) #<<
+    label = after_stat(count) 
   ), 
   stat = "count") #<<
 ```
