@@ -14,6 +14,8 @@ output:
       ratio: '16:9' 
       navigation:
         scroll: false 
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -460,3 +462,328 @@ Con la función `geom_point()` vamos a especificar que queremos que las observac
 class: middle, left
 
 ## Podemos consultas todas las geometrías en la [documentación del paquete](https://ggplot2.tidyverse.org/reference/). 
+
+
+---
+class: middle, left
+
+## Veamos ahora algunos ejemplos
+
+---
+class: left
+
+Tenemos los siguiente datos, ahora queremos saber como se distribuye la variable **estado_civil**.
+
+```{r, echo=FALSE}
+head(encuesta) %>% 
+  select(edad, estado_civil,raza,religion,
+         horas_tv) %>% 
+  gt() %>% 
+   tab_options(table.font.size = 28,
+               column_labels.font.size = "30")
+```
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-4, eval=FALSE}
+ggplot(
+  data = encuesta #<<
+)
+```
+
+1. **Definimos la capa de datos**
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-4", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-5, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil) #<<
+)
+```
+
+1. Definimos la capa de datos
+2. **Definimos el mapeo**
+  1. x = religion
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-5", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-6, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)
+) +
+  geom_bar() #<<
+```
+
+1. Definimos la capa de datos
+
+2. Definimos el mapeo
+  1. x = religion
+    
+3. **Agregamos una geometría**
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-6", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: middle, center
+
+```{r ref.label="ggplot-6", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
+``` 
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-7, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)
+) +
+  geom_bar() +
+  labs( #<<
+    x = "Estado Civil",
+    y = "Cantidad",
+    title = "Cantidad de encuestados por estado civil",
+    caption = "Fuente: Te lo juro por Dieguito maradona."
+  )
+```
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-7", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: middle, center
+
+```{r ref.label="ggplot-7", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
+``` 
+
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-8, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)
+) +
+  geom_bar(fill = "steelblue") + #<<
+  labs(
+    x = "Estado Civil",
+    y = "Cantidad",
+    title = "Cantidad de encuestados por estado civil",
+    caption = "Fuente: Te lo juro por Dieguito maradona."
+  )
+```
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-8", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: middle, center
+
+```{r ref.label="ggplot-8", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
+``` 
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-9, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)
+) +
+  geom_bar(fill = "steelblue") + 
+  labs(
+    x = "Estado Civil",
+    y = "Cantidad",
+    title = "Cantidad de encuestados por estado civil",
+    caption = "Fuente: Te lo juro por Dieguito maradona."
+  ) +
+  theme_minimal() #<<
+```
+
+]
+
+.pull-right[
+```{r ref.label="ggplot-9", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: middle, center
+
+```{r ref.label="ggplot-9", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
+``` 
+
+
+---
+class: middle, center
+
+## Muy bien ya tenemos un gráfico y todo parece un poco...
+
+<img src = "https://c.tenor.com/bxHQ4KcM8eMAAAAC/magic-meme.gif" width= 500px></img>
+
+---
+class: middle, center
+
+## Pero hay un par de cosas que aun debemos entender del gráfico anterior.
+
+
+---
+class: middle, center
+
+![](img/stat_count_01.png)
+
+---
+class: middle, center
+
+<img src = "img/stat_count_02.png" width= 500px></img>
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-10, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)) +
+geom_bar(fill = "steelblue")
+```
+
+<img src = "img/doc_01.png" width= 300px></img>
+
+]
+
+.pull-right[
+
+```{r ref.label="ggplot-10", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+
+---
+class: left
+
+.pull-left[
+Le pasamos a `StatCount` esto:
+
+```{r, echo=FALSE}
+data.frame(x = encuesta$estado_civil) %>% 
+  head() %>% 
+  gt() %>% 
+   tab_options(table.font.size = 20,
+               column_labels.font.size = "20") %>% 
+  cols_align(
+  align = "left",
+  columns = everything()
+)
+```
+]
+.pull-right[
+Y nos regresa esto:
+```{r, echo=FALSE}
+bars <- readRDS("data/barras_statCount.rds")
+bars$prop <- round(bars$prop,4)
+bars %>% 
+  gt() %>% 
+   tab_options(table.font.size = 20,
+               column_labels.font.size = "20",
+               table.align = "left") %>% 
+  cols_align(
+  align = "left",
+  columns = everything()
+)
+```
+]
+
+
+---
+class: left
+
+.pull-left[
+```{r, ggplot-11, eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)) +
+geom_bar(fill = "steelblue") +
+geom_text(
+  mapping = aes(label = after_stat(count)), #<<
+  stat = "count") 
+```
+
+
+]
+
+.pull-right[
+
+```{r ref.label="ggplot-11", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
+
+---
+class: left
+
+.pull-left[
+```{r,eval=FALSE}
+ggplot(
+  data = encuesta, 
+  mapping = aes(x = estado_civil)) +
+geom_bar(fill = "steelblue") +
+geom_text(
+  mapping = aes(label = after_stat(count)),
+  stat = "count") #<<
+```
+
+
+]
+
+.pull-right[
+
+```{r ref.label="ggplot-11", fig.callout=TRUE, echo=FALSE, dev='svglite'}
+``` 
+
+]
