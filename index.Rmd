@@ -783,7 +783,7 @@ geom_text(
   stat = "count") #<<
 ```
 
-
+Debemos indicar que vamos a usar el stat `count`.
 ]
 
 .pull-right[
