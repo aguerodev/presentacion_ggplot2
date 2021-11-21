@@ -519,7 +519,7 @@ ggplot(
 
 1. Definimos la capa de datos
 2. **Definimos el mapeo**
-  1. x = religion
+  1. x = estado_civil
 
 ]
 
