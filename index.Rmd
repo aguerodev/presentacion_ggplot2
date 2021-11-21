@@ -750,7 +750,9 @@ ggplot(
   mapping = aes(x = estado_civil)) +
 geom_bar(fill = "steelblue") +
 geom_text(
-  mapping = aes(label = after_stat(count)), #<<
+  mapping = aes(
+    label = after_stat(count) #<<
+  ), 
   stat = "count") 
 ```
 
@@ -774,7 +776,9 @@ ggplot(
   mapping = aes(x = estado_civil)) +
 geom_bar(fill = "steelblue") +
 geom_text(
-  mapping = aes(label = after_stat(count)),
+  mapping = aes(
+    label = after_stat(count) #<<
+  ), 
   stat = "count") #<<
 ```
 
