@@ -756,6 +756,7 @@ geom_text(
   stat = "count") 
 ```
 
+La función `after_stat()` nos permita usar los valores que calculan los stats.
 
 ]
 
