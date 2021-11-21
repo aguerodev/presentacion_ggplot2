@@ -796,12 +796,6 @@ geom_text(
 ]
 
 ---
-class: middle, center
-
-```{r ref.label="ggplot-12", fig.callout=TRUE, echo=FALSE, dev='svglite', fig.asp=9/16}
-``` 
-
----
 class: middle, left
 
 ### Los `stats` calculan lo que hace falta para dibujar las geometrías.
@@ -1305,3 +1299,8 @@ Paquetes que debemos revisar
 + [ggrepel](https://ggrepel.slowkow.com)
 + [patchwork](https://patchwork.data-imaginist.com)
 + [ggforce](https://ggforce.data-imaginist.com)
+
+---
+class: center, middle
+
+### Gracias :)
